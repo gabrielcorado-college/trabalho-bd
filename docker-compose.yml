@@ -1,0 +1,17 @@
+db:
+  image: postgres
+  volumes:
+    - ./db/sql.sql:/docker-entrypoint-initdb.d/sql.sql
+  ports:
+    - "5432:5432"
+
+web:
+  # build: .
+  image: trab_bd
+  command: pakyow server
+  ports:
+    - "3000:3000"
+  volumes:
+    - ./:/app
+  links:
+    - db
